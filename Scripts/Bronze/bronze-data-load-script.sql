@@ -3,10 +3,27 @@ This stored procedure orchestrates the end-to-end loading of the Bronze layer in
 It initializes batch-level and step-level timestamps to measure execution time for each table and the overall run.
 For each source file (CRM and ERP), the procedure truncates the target Bronze table to ensure a fresh load,
 Ingests raw data using BULK INSERT with minimal transformation, and logs the load duration.
-TRY–CATCH error handling ensures failures are captured and reported without leaving the process silent.
+TRYâ€“CATCH error handling ensures failures are captured and reported without leaving the process silent.
 At completion, the procedure reports the total batch runtime, providing operational visibility and traceability.
 */
+/*
+===============================================================================
+Stored Procedure: Load Bronze Layer (Source -> Bronze)
+===============================================================================
+Script Purpose:
+    This stored procedure loads data into the 'bronze' schema from external CSV files. 
+    It performs the following actions:
+    - Truncates the bronze tables before loading data.
+    - Uses the `BULK INSERT` command to load data from csv Files to bronze tables.
 
+Parameters:
+    None. 
+	  This stored procedure does not accept any parameters or return any values.
+
+Usage Example:
+    EXEC bronze.load_bronze;
+===============================================================================
+*/ 
 Create or alter procedure bronze.load_bronze As
 Begin
 	DECLARE @start_time DATETIME, @end_time DATETIME, @batch_start_time DATETIME, @batch_end_time DATETIME;-- Declare timestamp variables to track batch-level and step-level execution times.
@@ -142,3 +159,4 @@ END
 
 -- Call the procedure for loading the data
 Execute bronze.load_bronze;
+
