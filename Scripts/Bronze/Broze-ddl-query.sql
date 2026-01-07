@@ -1,4 +1,15 @@
-﻿IF OBJECT_ID('bronze.crm_cust_info', 'U') IS NOT NULL -- checkinh for table existance
+/*
+===============================================================================
+DDL Script: Create Bronze Tables
+===============================================================================
+Script Purpose:
+    This script creates tables in the 'bronze' schema, dropping existing tables 
+    if they already exist.
+	  Run this script to re-define the DDL structure of 'bronze' Tables
+===============================================================================
+*/
+
+IF OBJECT_ID('bronze.crm_cust_info', 'U') IS NOT NULL -- checkinh for table existance
     DROP TABLE bronze.crm_cust_info; -- Drop the table if it already exists to ensure a clean and idempotent table creation process
 
 Create table bronze.crm_cust_info(
@@ -62,4 +73,5 @@ Create table bronze.erp_px_cat_g1v2(
 	subcat       NVARCHAR(50),
 	maintenance  NVARCHAR(50)
 );
+
 
