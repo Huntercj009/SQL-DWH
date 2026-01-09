@@ -24,7 +24,9 @@ Usage:
 CREATE OR ALTER PROCEDURE gold.create_gold_views
 AS
 BEGIN
-    SET NOCOUNT ON;
+    SET NOCOUNT ON; -- WHAT: SET NOCOUNT ON suppresses the “X rows affected” messages returned by SQL Server after each statement.
+                    -- WHY : This prevents ETL/orchestration issues and reduces unnecessary network overhead, ensuring clean and reliable procedure execution.
+
 
     DECLARE 
         @start_time DATETIME,
